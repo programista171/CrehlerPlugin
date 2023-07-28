@@ -1,0 +1,14 @@
+{% sw_extends '@Storefront/storefront/page/product-detail/index.html.twig' %}
+
+{% block page_product_detail_description %}
+    {% set maxLength = 100 %} {# Maksymalna długość tekstu #}
+    {% set fullText = page.product.extensions.customTextField %} {# Pełny tekst z pola tekstowego produktu #}
+    {% set shortText = fullText|length > maxLength ? fullText|slice(0, maxLength) ~ '...' : fullText %} {# Skrócony tekst #}
+
+    {{ parent() }}
+
+    <div class="product-detail-custom-text">
+        {{ shortText }}
+        <a href="{{ path('storefront.action.product.full-text', { productId: page.product.id }) }}">Czytaj więcej</a>
+    </div>
+{% endblock %}
